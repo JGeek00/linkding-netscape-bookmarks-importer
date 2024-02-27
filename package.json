@@ -1,0 +1,16 @@
+{
+  "name": "linkding-netscape-bookmarks-importer",
+  "version": "1.0.0",
+  "description": "Converts Netscape bookmarks HTML file into JSON and imports it to Linkding",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "build": "esbuild ./src/index.js --bundle --platform=node --outfile=importer.js"
+  },
+  "author": "JGeek00",
+  "license": "ISC",
+  "dependencies": {
+    "esbuild": "^0.20.1",
+    "nbff-converter": "^1.1.2"
+  }
+}
