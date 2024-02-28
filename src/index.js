@@ -37,17 +37,22 @@ const main = async () => {
   const parsed = await nbffConverter.netscapeToJSON(htmlFile)
 
   const formatted = []
-  parsed.children.forEach((folder) => {
-    folder.children.forEach((bookmark) => {
-      if (bookmark.type === "url") {
-        formatted.push({
-          url: bookmark.url,
-          title: bookmark.title,
-          category: folder.title.replaceAll(' ', '-')
-        })
-      }
-    })
-  })
+  const convert = (node, categories = []) => {
+    if (node.children) {
+      node.children.forEach((child) => {
+        convert(child, node.title ? [...categories, node.title] : categories)
+      })
+    }
+    else if (node.type === "url") {
+      formatted.push({
+        url: node.url,
+        title: node.title,
+        category: categories.map((c) => c.replaceAll(' ', '-')).join(',')
+      })
+    }
+  }
+  convert(parsed, [])  
+  console.log(`Generated ${formatted.length} bookmarks for import`)  
 
 
 
@@ -65,7 +70,8 @@ const main = async () => {
   
 
   // SAVE BOOKMARKS INTO LINKDING
-
+  var success = 0
+  var errors = 0
   for (const bookmark of formatted) {
     const formData = new FormData();
     formData.append("url", bookmark.url)
@@ -85,11 +91,18 @@ const main = async () => {
     })
     if (result.status < 400) {
       console.log(`Success: ${bookmark.url}`)
+      success++
     }
     else {
       console.error(`Error (${result.status}): ${bookmark.url}`)
+      errors++
     }
   }
+  console.log('\n')
+  console.log('--------- RESULTS ---------')
+  console.log('\n')
+  console.log(`${success} imported successfully`)
+  console.log(`${errors} imports failed`)
 }
 
 main()
