@@ -1,6 +1,6 @@
 {
   "name": "linkding-netscape-bookmarks-importer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Converts Netscape bookmarks HTML file into JSON and imports it to Linkding",
   "main": "index.js",
   "scripts": {

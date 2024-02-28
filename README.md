@@ -6,11 +6,16 @@ This script takes an HTML file with the Netscape bookmarks format, converts it t
 2. Get the ``importer.js`` file from the releases section.
 3. Create a folder called ``data`` on the same directory where the ``importer.js`` is placed.
 4. Inside that ``data`` folder, place the bookmarks HTML file, and rename it to ``bookmarks.html``.
-5. Inside that ``data`` folder, create a new file called ``linkding-config.json`` with the following structure:
+5. Inside that ``data`` folder, create a new file called ``config.json`` with the following structure:
 ```json
 {
-  "url": "LINKDING_URL",
-  "token": "LINKDING_API_TOKEN"
+  "linkding": {
+    "url": "LINKDING_URL",
+    "token": "LINKDING_TOKEN"
+  },
+  "options": {
+    "exportGeneratedBookmarks": true
+  }
 }
 ```
 6. Replace ``LINKDING_URL`` with the base URL you use to access Linkding. Example: ``https://linkding.mydomain.com``.

@@ -11,20 +11,20 @@ const main = async () => {
     throw Error("File bookmarks.html doesn't exist.")
   }
 
-  const linkdingConfigExists = fs.existsSync(constants.LINKDING_CONFIG_FILE_PATH)
-  if (linkdingConfigExists !== true) {
-    throw Error("File linkding-config.json doesn't exist.")
+  const configExists = fs.existsSync(constants.CONFIG_FILE_PATH)
+  if (configExists !== true) {
+    throw Error("File config.json doesn't exist.")
   }
 
 
 
 
-  // VALIDATE LINKDING CONFIG IS CORRECT
+  // VALIDATE CONFIG IS CORRECT
 
-  const linkdingConfigRaw = await fs.promises.readFile(constants.LINKDING_CONFIG_FILE_PATH, 'utf-8')
-  const linkdingConfigParsed = JSON.parse(linkdingConfigRaw)
-  if (!linkdingConfigParsed.url || !linkdingConfigParsed.token) {
-    throw Error("Linkding configuration not valid.")
+  const configRaw = await fs.promises.readFile(constants.CONFIG_FILE_PATH, 'utf-8')
+  const configParsed = JSON.parse(configRaw)
+  if (!configParsed.linkding.url || !configParsed.linkding.token) {
+    throw Error("Configuration not valid.")
   }
 
 
@@ -50,6 +50,18 @@ const main = async () => {
   })
 
 
+
+
+  // WRITE FORMATTED BOOKMARKS INTO FILE
+
+  if (configParsed.options.exportParsedBookmarks === true) {
+    fs.writeFileSync(constants.BOOKMARKS_EXPORT_PARSED_FILE_PATH, JSON.stringify(parsed), 'utf-8')
+  }
+  if (configParsed.options.exportBookmarksPreLinkdingImport === true) {
+    fs.writeFileSync(constants.BOOKMARKS_EXPORT_PRE_IMPORT_FILE_PATH, JSON.stringify(formatted), 'utf-8')
+  }
+
+
   
 
   // SAVE BOOKMARKS INTO LINKDING
@@ -64,10 +76,10 @@ const main = async () => {
     formData.append("shared", "false")
     formData.append("tag_names", bookmark.category)
     
-    const result = await fetch(`${linkdingConfigParsed.url}/api/bookmarks/`, {
+    const result = await fetch(`${configParsed.linkding.url}/api/bookmarks/`, {
       method: "post",
       headers: {
-        "Authorization": `Token ${linkdingConfigParsed.token}`
+        "Authorization": `Token ${configParsed.linkding.token}`
       },
       body: formData
     })

@@ -1,4 +1,9 @@
+# node modules
 node_modules
-linkding-config.json
+
+# data
+data/*.json
 bookmarks.html
+
+# generated importer
 importer.js

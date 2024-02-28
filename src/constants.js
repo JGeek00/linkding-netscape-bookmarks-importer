@@ -1,4 +1,11 @@
 const BOOKMARKS_FILE_PATH = "./data/bookmarks.html"
-const LINKDING_CONFIG_FILE_PATH = "./data/linkding-config.json"
+const CONFIG_FILE_PATH = "./data/config.json"
+const BOOKMARKS_EXPORT_PARSED_FILE_PATH = "./data/bookmarks-parsed.json"
+const BOOKMARKS_EXPORT_PRE_IMPORT_FILE_PATH = "./data/bookmarks-pre-import.json"
 
-module.exports = { BOOKMARKS_FILE_PATH, LINKDING_CONFIG_FILE_PATH }
+module.exports = { 
+  BOOKMARKS_FILE_PATH, 
+  CONFIG_FILE_PATH, 
+  BOOKMARKS_EXPORT_PARSED_FILE_PATH,
+  BOOKMARKS_EXPORT_PRE_IMPORT_FILE_PATH,
+}
