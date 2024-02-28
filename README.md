@@ -14,7 +14,8 @@ This script takes an HTML file with the Netscape bookmarks format, converts it t
     "token": "LINKDING_TOKEN"
   },
   "options": {
-    "exportGeneratedBookmarks": true
+    "exportParsedBookmarks": true,
+    "exportBookmarksPreLinkdingImport": true
   }
 }
 ```

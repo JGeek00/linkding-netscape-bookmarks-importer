@@ -12,7 +12,8 @@ Here you need to input the necessary details to establish a connection with the 
     "token": "LINKDING_TOKEN"
   },
   "options": {
-    "exportGeneratedBookmarks": true
+    "exportParsedBookmarks": true,
+    "exportBookmarksPreLinkdingImport": true
   }
 }
 ```
