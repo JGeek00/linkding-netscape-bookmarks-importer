@@ -21,3 +21,4 @@ This script takes an HTML file with the Netscape bookmarks format, converts it t
 ```
 6. Replace ``LINKDING_URL`` with the base URL you use to access Linkding. Example: ``https://linkding.mydomain.com``.
 7. Replace ``LINKDING_API_TOKEN`` with Linkdin's API token. To get it login into the web application, go to Settings, go to Integrations, and at the bottom of that page you can find the API token.
+8. Run the script with ``node importer_x.x.x.js``.
